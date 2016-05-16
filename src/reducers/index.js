@@ -1,8 +1,12 @@
 import {combineReducers} from 'redux'
 import {routerReducer} from 'react-router-redux'
-import eventlist from './eventlistReducer'
+import users from './usersReducer'
+import messages from './messagesReducer'
+import rtc from './rtcReducer'
 
 export default combineReducers({
-  eventlist,
+  users,
+  messages,
+  rtc,
   routing: routerReducer
 })

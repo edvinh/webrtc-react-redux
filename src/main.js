@@ -3,7 +3,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import attachFastClick from 'fastclick'
 import configureStore from './store/configureStore'
-import {browserHistory} from 'react-router'
+import {hashHistory} from 'react-router'
 import {syncHistoryWithStore} from 'react-router-redux'
 import injectTapEventPlugin from 'react-tap-event-plugin'
 import webRtc from './util/configureRtc'
@@ -19,8 +19,8 @@ attachFastClick.attach(document.body)
 // Expose globally
 window.React = React
 
-const store = configureStore(browserHistory, window.INITIAL_STATE)
-const history = syncHistoryWithStore(browserHistory, store)
+const store = configureStore(hashHistory, window.INITIAL_STATE)
+const history = syncHistoryWithStore(hashHistory, store)
 webRtc.setStore(store);
 
 let render = () => {

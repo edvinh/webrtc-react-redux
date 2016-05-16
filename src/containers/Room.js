@@ -7,6 +7,7 @@ import Paper from 'material-ui/lib/paper'
 import Snackbar from 'material-ui/lib/snackbar'
 import TextField from 'material-ui/lib/text-field'
 
+import WebRTC from '../util/configureRtc'
 const mockUsers = [
   {
     name: 'User1'
@@ -17,10 +18,20 @@ const mockUsers = [
 ]
 
 class Room extends Component {
+  constructor () {
+    super()
+    WebRTC.on('readyToCall', () => {
+      var match = /#\/(\w+)(\?|$)/.exec(window.location.hash)
+      if (match && match[1]) {
+        WebRTC.joinRoom(match[1])
+      }
+    });
+  }
+
   render () {
     return (
       <Paper>
-        <Userlist users={mockUsers} />
+        <Userlist users={this.props.users} />
       </Paper>
     )
   }
@@ -28,7 +39,8 @@ class Room extends Component {
 
 function mapStateToProps (state) {
   return {
-    socket: state.socket
+    users: state.users,
+    rtc: state.rtc.cli
   }
 }
 

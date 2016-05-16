@@ -1,3 +1,4 @@
+export const SET_CLIENT = 'SET_CLIENT'
 export const READY_TO_CALL = 'READY_TO_CALL'
 export const ROOM_JOINED = 'ROOM_JOINED'
 export const PEER_DISCONNECTED = 'PEER_DISCONNECTED'

@@ -1,20 +1,29 @@
 import * as types from '../constants/actionTypes'
 
+export function setClient (payload) {
+  return {
+    type: types.SET_CLIENT,
+    client: payload
+  }
+}
+
 export function readyToCall () {
   return {
     type: types.READY_TO_CALL
   }
 }
 
-export function panic () {
+export function panic (payload) {
   return {
-    type: types.PANIC
+    type: types.PANIC,
+    message: payload
   }
 }
 
-export function roomJoined () {
+export function roomJoined (payload) {
   return {
-    type: types.ROOM_JOINED
+    type: types.ROOM_JOINED,
+    message: payload
   }
 }
 
@@ -24,9 +33,10 @@ export function peerDisconnected () {
   }
 }
 
-export function peerChangedName () {
+export function peerChangedName (payload) {
   return {
-    type: types.PEER_CHANGED_NAME
+    type: types.PEER_CHANGED_NAME,
+    peer: payload
   }
 }
 
@@ -38,6 +48,7 @@ export function peerConnected () {
 
 export function chatMessage () {
   return {
-    type: types.CHAT_MESSAGE
+    type: types.CHAT_MESSAGE,
+    message: payload
   }
 }
