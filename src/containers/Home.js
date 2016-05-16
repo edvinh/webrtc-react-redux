@@ -1,5 +1,5 @@
 import React, {Component, PropTypes} from 'react'
-import * as socketActions from '../actions/socketActions'
+import * as rtcActions from '../actions/rtcActions'
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
 import Paper from 'material-ui/lib/paper'
@@ -8,7 +8,7 @@ import TextField from 'material-ui/lib/text-field'
 
 class Home extends Component {
   render () {
-    var lbl = 'Room ID';
+    var lbl = 'Room ID'
     return (
       <Paper>
         <TextField hintText={lbl} floatingLabelText={lbl} />
@@ -24,7 +24,7 @@ function mapStateToProps (state) {
 }
 
 function mapDispatchToProps (dispatch) {
-  return bindActionCreators(socketActions, dispatch)
+  return bindActionCreators(rtcActions, dispatch)
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home)

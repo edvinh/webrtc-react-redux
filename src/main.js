@@ -6,7 +6,7 @@ import configureStore from './store/configureStore'
 import {browserHistory} from 'react-router'
 import {syncHistoryWithStore} from 'react-router-redux'
 import injectTapEventPlugin from 'react-tap-event-plugin'
-import WSClient from './util/WSClient'
+import webRtc from './util/configureRtc'
 
 // Needed for onTouchTap
 // http://stackoverflow.com/a/34015469/988941
@@ -19,10 +19,9 @@ attachFastClick.attach(document.body)
 // Expose globally
 window.React = React
 
-const cli = new WSClient('localhost:8080')
-const store = configureStore(browserHistory, cli, window.INITIAL_STATE)
+const store = configureStore(browserHistory, window.INITIAL_STATE)
 const history = syncHistoryWithStore(browserHistory, store)
-cli.setDispatcher(store.dispatch)
+webRtc.setStore(store);
 
 let render = () => {
   const Root = require('./containers/Root').default

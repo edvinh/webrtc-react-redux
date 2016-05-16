@@ -1,6 +1,6 @@
 import React, {Component, PropTypes} from 'react'
 import Userlist from '../components/Userlist'
-import * as socketActions from '../actions/socketActions'
+import * as rtcActions from '../actions/rtcActions'
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
 import Paper from 'material-ui/lib/paper'
@@ -33,7 +33,7 @@ function mapStateToProps (state) {
 }
 
 function mapDispatchToProps (dispatch) {
-  return bindActionCreators(socketActions, dispatch)
+  return bindActionCreators(rtcActions, dispatch)
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Room)

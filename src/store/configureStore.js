@@ -2,11 +2,10 @@ import {createStore, applyMiddleware, compose} from 'redux'
 import thunk from 'redux-thunk'
 import rootReducer from '../reducers'
 import {routerMiddleware} from 'react-router-redux'
-import rtcClientMiddleware from '../util/rtcClientMiddleware'
 
-export default function configureStore (history, rtcClient, initialState = {}) {
+export default function configureStore (history, initialState = {}) {
   let middlewares =
-    applyMiddleware(thunk, routerMiddleware(history), rtcClientMiddleware(rtcClient))
+    applyMiddleware(thunk, routerMiddleware(history))
 
   // if (__DEV__) {
   middlewares = compose(middlewares, window.devToolsExtension
@@ -25,6 +24,5 @@ export default function configureStore (history, rtcClient, initialState = {}) {
     })
   }
 
-  rtcClient.setStore(store)
   return store
 }
