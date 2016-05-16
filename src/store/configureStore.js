@@ -2,11 +2,11 @@ import {createStore, applyMiddleware, compose} from 'redux'
 import thunk from 'redux-thunk'
 import rootReducer from '../reducers'
 import {routerMiddleware} from 'react-router-redux'
-import wsClientMiddleware from '../util/wsClientMiddleware'
+import rtcClientMiddleware from '../util/rtcClientMiddleware'
 
-export default function configureStore (history, wsClient, initialState = {}) {
+export default function configureStore (history, rtcClient, initialState = {}) {
   let middlewares =
-    applyMiddleware(thunk, routerMiddleware(history), wsClientMiddleware(wsClient))
+    applyMiddleware(thunk, routerMiddleware(history), rtcClientMiddleware(rtcClient))
 
   // if (__DEV__) {
   middlewares = compose(middlewares, window.devToolsExtension
@@ -25,5 +25,6 @@ export default function configureStore (history, wsClient, initialState = {}) {
     })
   }
 
+  rtcClient.setStore(store)
   return store
 }

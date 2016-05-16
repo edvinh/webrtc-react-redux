@@ -6,10 +6,10 @@ export default class Eventlist extends Component  {
   render () {
     return (
       <List>
-        {this.props.events.map((event, i) => {
+        {this.props.users.map((u, i) => {
           return (
             <ListItem
-              primaryText={event.name}
+              primaryText={u.name}
               key={i}
             />
           )
@@ -17,8 +17,4 @@ export default class Eventlist extends Component  {
       </List>
     )
   }
-}
-
-Eventlist.propTypes = {
-  events: PropTypes.array.isRequired
 }
