@@ -1,10 +1,10 @@
 import React, {Component, PropTypes} from 'react'
-import * as rtcActions from '../actions/rtcActions'
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
 import Paper from 'material-ui/lib/paper'
 import Snackbar from 'material-ui/lib/snackbar'
 import TextField from 'material-ui/lib/text-field'
+import {push} from 'react-router-redux'
 
 class Home extends Component {
   constructor () {
@@ -23,13 +23,9 @@ class Home extends Component {
 
   onType (ev) {
     if (ev.keyCode === 13) {
-      this.context.router.push(ev.target.value)
+      this.props.push('/' + ev.target.value)
     }
   }
-}
-
-Home.contextTypes = {
-  router: React.PropTypes.object.isRequired,
 }
 
 function mapStateToProps (state) {
@@ -39,7 +35,9 @@ function mapStateToProps (state) {
 }
 
 function mapDispatchToProps (dispatch) {
-  return bindActionCreators(rtcActions, dispatch)
+  return bindActionCreators({
+    push
+  }, dispatch)
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home)

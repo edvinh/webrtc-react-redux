@@ -13,6 +13,7 @@ const options = {
 
 const webRtc = new SimpleWebRTC(options)
 
+webRtc.on('readyToCall', () => store.dispatch(rtcActions.readyToCall()))
 webRtc.on('localMediaError', err => store.dispatch(rtcActions.panic(err)))
 webRtc.on('joinedRoom', () => store.dispatch(rtcActions.roomJoined(webRtc.connection.getSessionid())))
 webRtc.on('peerStreamRemoved', () => store.dispatch(rtcActions.peerDisconnected()))
@@ -34,6 +35,5 @@ webRtc.on('channelMessage', (peer, label, data) => {
 let store;
 webRtc.setStore = function (s) {
   store = s
-  store.dispatch(rtcActions.setClient(webRtc))
 }
 export default webRtc

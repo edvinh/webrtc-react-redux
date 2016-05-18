@@ -20,12 +20,16 @@ const mockUsers = [
 class Room extends Component {
   constructor () {
     super()
-    WebRTC.on('readyToCall', () => {
-      var match = /#\/(\w+)(\?|$)/.exec(window.location.hash)
-      if (match && match[1]) {
-        WebRTC.joinRoom(match[1])
+  }
+
+  // TODO: Not related to view. Should be done
+  // in some kind of rtc controller
+  componentWillReceiveProps (props) {
+    if (props.state === 'readyToCall') {
+      if (props.route) {
+        this.props.joinRoom(props.route)
       }
-    });
+    }
   }
 
   render () {
@@ -37,10 +41,11 @@ class Room extends Component {
   }
 }
 
-function mapStateToProps (state) {
+function mapStateToProps (state, ownProps) {
   return {
     users: state.users,
-    rtc: state.rtc.cli
+    state: state.rtc.state,
+    route: ownProps.location.pathname.substr(1)
   }
 }
 

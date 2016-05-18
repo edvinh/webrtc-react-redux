@@ -1,4 +1,5 @@
 import * as types from '../constants/actionTypes'
+import rtc from '../util/configureRtc'
 
 export function setClient (payload) {
   return {
@@ -10,6 +11,16 @@ export function setClient (payload) {
 export function readyToCall () {
   return {
     type: types.READY_TO_CALL
+  }
+}
+
+export function joinRoom (room) {
+  rtc.on('joinedRoom', () => {
+    rtc.sendDirectlyToAll(room, 'peerConnected', 'someone' + Math.random())
+  })
+  rtc.joinRoom(room)
+  return {
+    type: types.JOIN_ROOM
   }
 }
 

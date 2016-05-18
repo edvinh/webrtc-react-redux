@@ -10,6 +10,21 @@ export default function rtcReducer (state = initialState, action) {
         ...state,
         client: action.client
       }
+    case types.JOIN_ROOM:
+      return {
+        ...state,
+        state: 'connecting'
+      }
+    case types.ROOM_JOINED:
+      return {
+        ...state,
+        state: 'connected'
+      }
+    case types.READY_TO_CALL:
+      return {
+        ...state,
+        state: 'readyToCall'
+      }
     default:
       return state
   }
